@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import { useDispatch } from "react-redux";
 
 import "../styles.css";
@@ -10,6 +11,8 @@ import { changeWellNumber } from "../reducers/wellNumber";
 export default function Entry() {
     /* Use redux state */
     const dispatch = useDispatch();
+    /* Use react router */
+    const navigate = useNavigate();
     return (
         <div
             className="container center-inside"
@@ -49,8 +52,14 @@ export default function Entry() {
                     />
                 </div>
                 <div className="row">
-                    <ModeSelectButton mode="1. Design" />
-                    <ModeSelectButton mode="2. Start" />
+                    <ModeSelectButton
+                        mode="1. Design"
+                        onClick={() => navigate("/design")}
+                    />
+                    <ModeSelectButton
+                        mode="2. Start"
+                        onClick={() => navigate("/start")}
+                    />
                 </div>
             </div>
         </div>

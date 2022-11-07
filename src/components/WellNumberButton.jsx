@@ -6,7 +6,7 @@ export default function WellNumberButton({ wellNumber, onClick }) {
     /* Use redux state */
     const { row, col } = useSelector((state) => state.wellNumber);
     return (
-        <div className="col-md-3 col-sm-6" onClick={onClick}>
+        <div className="col-md-3 col-sm-6">
             <div
                 className={
                     "btn " +
@@ -15,6 +15,7 @@ export default function WellNumberButton({ wellNumber, onClick }) {
                         : "btn-outline-primary")
                 }
                 style={{ width: "100%" }}
+                onClick={onClick}
             >
                 {wellNumber}
             </div>

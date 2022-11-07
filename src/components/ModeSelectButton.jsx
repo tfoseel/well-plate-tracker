@@ -6,15 +6,15 @@ export default function ModeSelectButton({ mode, onClick }) {
     /* Use redux state */
     const { row, col } = useSelector((state) => state.wellNumber);
     return (
-        <div className="col-md-6" onClick={onClick}>
+        <div className="col-md-6">
             <div
                 className={
-                    "btn " +
-                    (row * col === 0
-                        ? "btn-outline-secondary disabled"
-                        : "btn-outline-primary")
+                    "btn btn-outline-primary" +
+                    (row * col === 0 ? "btn-outline-secondary disabled" : "")
                 }
                 style={{ width: "100%" }}
+                onClick={onClick}
+                disabled={row * col === 0}
             >
                 {mode}
             </div>
