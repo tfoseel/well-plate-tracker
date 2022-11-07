@@ -1,14 +1,40 @@
 body {
+    font-family: "Poor Story", cursive;
     margin: 0;
     padding: 0;
     text-align: center;
-    background-color: #000000;
+    background-color: black;
     color: white;
+    -ms-user-select: none;
+    -moz-user-select: -moz-none;
+    -khtml-user-select: none;
+    -webkit-user-select: none;
+    user-select: none;
+}
+
+.center-inside {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.logo {
+    width: 7rem;
+    height: 7rem;
+}
+
+.title {
+    font-size: 5rem;
+    line-height: 100%;
+}
+
+.well-number-button {
+    width: 100%;
 }
 
 .table-wrapper {
-    width: 800px;
-    height: 800px;
+    width: 100vw;
+    height: 100vh;
     overflow: auto;
 }
 
@@ -34,9 +60,10 @@ body {
 }
 
 .cell {
-    width: 50px;
-    height: 50px;
-    line-height: 50px;
+    width: 4rem;
+    height: 4rem;
+    line-height: 4rem;
+    font-size: 1rem;
 }
 
 .well {
