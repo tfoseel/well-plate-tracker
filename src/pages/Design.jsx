@@ -1,30 +1,52 @@
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
+import { useNavigate } from "react-router-dom";
+import { useSelector, useDispatch } from "react-redux";
 
 import "../styles.css";
 
-import Header from "./Header";
-import Cell from "./Cell";
+import Header from "../components/Header";
+import Cell from "../components/Cell";
+import EditButton from "../components/EditButton";
 
-// Get 2D array.
-const init2DArray = (row, col) => {
-    let arr = Array.from(Array(row), () => new Array(col));
-    arr.map((a) => a.fill(false));
-    return arr;
-};
+import { init2DArray, getIndex, updateWellState } from "../reducers/wellState";
 
-// Get index from well number.
-const getIndex = (pos) => ({
-    y: pos.charCodeAt(0) - "A".charCodeAt(0),
-    x: Number(pos.substring(1, pos.length)) - 1,
-});
+export default function Design() {
+    /* Use redux state */
+    const dispatch = useDispatch();
+    const { row, col } = useSelector((state) => state.wellNumber);
+    const wellState = useSelector((state) => state.wellState);
 
-export default function WellPlate({ row, col }) {
-    // Define ROW and COULMN of well plate.
+    /* Use react navigation */
+    const navigate = useNavigate();
+    useEffect(() => {
+        if (row === 0 && col === 0) navigate("/");
+    });
+
+    /* Define ROW and COULMN of well plate */
     const ROW = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".substring(0, row).split("");
     const COULMN = [...Array(col)].map((_, i) => i + 1);
-    // Manage selected cells.
-    const [selected, setSelected] = useState(init2DArray(row, col));
-    // Handle click event.
+
+    /* Manage selected cells */
+    const [selected, setSelected] = useState(init2DArray(row, col, false));
+
+    /* Helper functions */
+    const isIthRowAllSelected = (pos) => {
+        return selected[pos.charCodeAt(0) - "A".charCodeAt(0)].every(
+            (e) => e === true
+        );
+    };
+
+    const isIthColAllSelected = (pos) => {
+        let result = true;
+        Array(row)
+            .fill(0)
+            .forEach((_, i) => {
+                result = selected[i][Number(pos) - 1] && result;
+            });
+        return result;
+    };
+
+    /* Handle click event */
     const handleClick = (e) => {
         const copy = [...selected];
         const [type, pos] = e.target.id.split("-");
@@ -32,10 +54,39 @@ export default function WellPlate({ row, col }) {
             const { y, x } = getIndex(pos);
             copy[y][x] = !copy[y][x];
         } else if (pos.match(/[A-Z]/i)) {
-            for (let i = 0; i < col; i++)
-                copy[pos.charCodeAt(0) - "A".charCodeAt(0)][i] = true;
+            if (isIthRowAllSelected(pos)) {
+                // Unselect all wells in the row.
+                Array(col)
+                    .fill(0)
+                    .forEach(
+                        (_, i) =>
+                            (copy[pos.charCodeAt(0) - "A".charCodeAt(0)][
+                                i
+                            ] = false)
+                    );
+            } else {
+                // Select all wells in the row.
+                Array(col)
+                    .fill(0)
+                    .forEach(
+                        (_, i) =>
+                            (copy[pos.charCodeAt(0) - "A".charCodeAt(0)][
+                                i
+                            ] = true)
+                    );
+            }
         } else if (!isNaN(Number(pos))) {
-            for (let i = 0; i < row; i++) copy[i][Number(pos) - 1] = true;
+            if (isIthColAllSelected(pos)) {
+                // Unselect all wells in the column.
+                Array(row)
+                    .fill(0)
+                    .forEach((_, i) => (copy[i][Number(pos) - 1] = false));
+            } else {
+                // Select all wells in the column.
+                Array(row)
+                    .fill(0)
+                    .forEach((_, i) => (copy[i][Number(pos) - 1] = true));
+            }
         }
         setSelected(copy);
     };
@@ -44,6 +95,7 @@ export default function WellPlate({ row, col }) {
             className="center-inside table-wrapper"
             style={{ width: "100vw", height: "100vh" }}
         >
+            <EditButton onClick={() => console.log(wellState)} />
             <table>
                 <tbody className="table">
                     <tr>
@@ -53,12 +105,12 @@ export default function WellPlate({ row, col }) {
                         ))}
                     </tr>
                     {ROW.map((r) => (
-                        <tr>
+                        <tr key={"row-" + r}>
                             <Header pos={r} key={r} onClick={handleClick} />
                             {COULMN.map((n) => (
                                 <Cell
-                                    pos={r + n}
                                     key={r + n}
+                                    pos={r + n}
                                     selected={
                                         selected[getIndex(r + n).y][
                                             getIndex(r + n).x

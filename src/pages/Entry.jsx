@@ -7,6 +7,7 @@ import WellNumberButton from "../components/WellNumberButton";
 import ModeSelectButton from "../components/ModeSelectButton";
 
 import { changeWellNumber } from "../reducers/wellNumber";
+import { initWellState } from "../reducers/wellState";
 
 export default function Entry() {
     /* Use redux state */
@@ -36,19 +37,31 @@ export default function Entry() {
                 <div className="row mb-3">
                     <WellNumberButton
                         wellNumber={24}
-                        onClick={() => dispatch(changeWellNumber(24))}
+                        onClick={() => {
+                            dispatch(changeWellNumber(24));
+                            dispatch(initWellState(24));
+                        }}
                     />
                     <WellNumberButton
                         wellNumber={48}
-                        onClick={() => dispatch(changeWellNumber(48))}
+                        onClick={() => {
+                            dispatch(changeWellNumber(48));
+                            dispatch(initWellState(48));
+                        }}
                     />
                     <WellNumberButton
                         wellNumber={96}
-                        onClick={() => dispatch(changeWellNumber(96))}
+                        onClick={() => {
+                            dispatch(changeWellNumber(96));
+                            dispatch(initWellState(96));
+                        }}
                     />
                     <WellNumberButton
                         wellNumber={384}
-                        onClick={() => dispatch(changeWellNumber(384))}
+                        onClick={() => {
+                            dispatch(changeWellNumber(384));
+                            dispatch(initWellState(384));
+                        }}
                     />
                 </div>
                 <div className="row">

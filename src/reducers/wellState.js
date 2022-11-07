@@ -7,14 +7,14 @@ export const UPDATE = "WELLSTATE/UPDATE";
 
 /* Helper functions */
 
-const init2DArray = (row, col) => {
+export const init2DArray = (row, col, element) => {
     let arr = Array.from(Array(row), () => new Array(col));
-    arr.map((a) => a.fill({ color: "red", label: "" }));
+    arr.map((a) => a.fill(element));
     return arr;
 };
 
 // ex. getIndex("A3") returns { y: 0, x: 2 }.
-const getIndex = (pos) => ({
+export const getIndex = (pos) => ({
     y: pos.charCodeAt(0) - "A".charCodeAt(0),
     x: Number(pos.substring(1, pos.length)) - 1,
 });
@@ -37,13 +37,13 @@ const initalState = [];
 const wellState = (state = initalState, action) => {
     switch (action.type) {
         case WELL_24:
-            return init2DArray(4, 6);
+            return init2DArray(4, 6, { color: "red", label: "" });
         case WELL_48:
-            return init2DArray(6, 8);
+            return init2DArray(6, 8, { color: "red", label: "" });
         case WELL_96:
-            return init2DArray(8, 12);
+            return init2DArray(8, 12, { color: "red", label: "" });
         case WELL_384:
-            return init2DArray(16, 24);
+            return init2DArray(16, 24, { color: "red", label: "" });
         case UPDATE:
             const copy = [...state];
             action.posList.forEach((pos) => {
