@@ -1,16 +1,16 @@
+import { useSelector } from "react-redux";
+
 import "../styles.css";
 
-export default function WellNumberButton({
-    wellNumber,
-    currentWellNumber,
-    onClick,
-}) {
+export default function WellNumberButton({ wellNumber, onClick }) {
+    /* Use redux state */
+    const { row, col } = useSelector((state) => state.wellNumber);
     return (
         <div className="col-md-3 col-sm-6" onClick={onClick}>
             <div
                 className={
                     "btn " +
-                    (wellNumber === currentWellNumber
+                    (wellNumber === row * col
                         ? "btn-primary"
                         : "btn-outline-primary")
                 }

@@ -1,5 +1,4 @@
 body {
-    font-family: "Poor Story", cursive;
     margin: 0;
     padding: 0;
     text-align: center;
@@ -24,6 +23,7 @@ body {
 }
 
 .title {
+    font-family: "Poor Story";
     font-size: 5rem;
     line-height: 100%;
 }
@@ -62,11 +62,29 @@ body {
 .cell {
     width: 4rem;
     height: 4rem;
-    line-height: 4rem;
+    color: white;
     font-size: 1rem;
+    display: flex;
+    justify-content: center;
+    align-items: center;
 }
 
 .well {
     border: 2px solid white;
     border-radius: 50%;
+}
+
+.well-selected {
+    animation-duration: 0.5s;
+    animation-name: blink;
+    animation-iteration-count: infinite;
+}
+
+@keyframes blink {
+    from {
+        border: 2px dotted;
+    }
+    to {
+        border: 2px dashed yellow;
+    }
 }

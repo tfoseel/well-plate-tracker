@@ -1,12 +1,15 @@
-import React, { useState } from "react";
+import { useDispatch } from "react-redux";
 
 import "../styles.css";
 
-import WellNumberButton from "./WellNumberButton";
-import ModeSelectButton from "./ModeSelectButton";
+import WellNumberButton from "../components/WellNumberButton";
+import ModeSelectButton from "../components/ModeSelectButton";
+
+import { changeWellNumber } from "../reducers/wellNumber";
 
 export default function Entry() {
-    const [currentWellNumber, setCurrentWellNumber] = useState(0);
+    /* Use redux state */
+    const dispatch = useDispatch();
     return (
         <div
             className="container center-inside"
@@ -30,23 +33,19 @@ export default function Entry() {
                 <div className="row mb-3">
                     <WellNumberButton
                         wellNumber={24}
-                        currentWellNumber={currentWellNumber}
-                        onClick={() => setCurrentWellNumber(24)}
+                        onClick={() => dispatch(changeWellNumber(24))}
                     />
                     <WellNumberButton
                         wellNumber={48}
-                        currentWellNumber={currentWellNumber}
-                        onClick={() => setCurrentWellNumber(48)}
+                        onClick={() => dispatch(changeWellNumber(48))}
                     />
                     <WellNumberButton
                         wellNumber={96}
-                        currentWellNumber={currentWellNumber}
-                        onClick={() => setCurrentWellNumber(96)}
+                        onClick={() => dispatch(changeWellNumber(96))}
                     />
                     <WellNumberButton
                         wellNumber={384}
-                        currentWellNumber={currentWellNumber}
-                        onClick={() => setCurrentWellNumber(384)}
+                        onClick={() => dispatch(changeWellNumber(384))}
                     />
                 </div>
                 <div className="row">
