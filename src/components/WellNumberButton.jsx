@@ -6,10 +6,10 @@ export default function WellNumberButton({ wellNumber, onClick }) {
     /* Use redux state */
     const { row, col } = useSelector((state) => state.wellNumber);
     return (
-        <div className="col-md-3 col-sm-6">
+        <div className="col-md-3 col-sm-6 mt-2 mb-2">
             <div
                 className={
-                    "btn " +
+                    "entry-button btn " +
                     (wellNumber === row * col
                         ? "btn-primary"
                         : "btn-outline-primary")

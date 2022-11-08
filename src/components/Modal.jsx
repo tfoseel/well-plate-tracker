@@ -1,10 +1,16 @@
 export default function dialog() {
     return (
-        <dialog open>
-            <p>Greetings, one and all!</p>
-            <form method="dialog">
-                <button>OK</button>
-            </form>
-        </dialog>
+        <div id="myModal" class="modal">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <span class="close">&times;</span>
+                    <h2>Modal Header</h2>
+                </div>
+                <div className="modal-body">
+                    <p>Some text in the Modal Body</p>
+                    <p>Some other text...</p>
+                </div>
+            </div>
+        </div>
     );
 }

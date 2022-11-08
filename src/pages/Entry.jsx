@@ -20,8 +20,8 @@ export default function Entry() {
             style={{ width: "100vw", height: "100vh" }}
         >
             <div>
-                <div className="row mb-5">
-                    <div className="col-md center-inside">
+                <div className="row">
+                    <div className="col-md center-inside mt-3 mb-3">
                         <div>
                             <img
                                 className="logo"
@@ -30,7 +30,7 @@ export default function Entry() {
                             />
                         </div>
                     </div>
-                    <div className="col-md title center-inside">
+                    <div className="col-md title center-inside mt-3 mb-3">
                         <div>Well Plate Tracker</div>
                     </div>
                 </div>
