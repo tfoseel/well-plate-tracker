@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { useSelector, useDispatch } from "react-redux";
+import { useSelector } from "react-redux";
 
 import "../styles.css";
 
@@ -50,7 +50,7 @@ export default function Design() {
     /* Handle click event */
     const handleClick = (e) => {
         const copy = [...selected];
-        const [type, pos] = e.target.id.split("-");
+        const [type, pos] = e.target.getAttribute("value").split("-");
         if (type === "well") {
             const { y, x } = getIndex(pos);
             copy[y][x] = !copy[y][x];

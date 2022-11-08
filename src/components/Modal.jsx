@@ -65,12 +65,24 @@ export default function Modal({ isVisible, selected, closeFunction }) {
                                         modalContents.label
                                     )
                                 );
-                                alert("Saved!");
+                                setModalContents({
+                                    color: "",
+                                    label: "",
+                                });
                                 closeFunction();
                             }}
                         ></i>
                         <span style={{ margin: "0 10px" }}></span>
-                        <i className="fas fa-times" onClick={closeFunction}></i>
+                        <i
+                            className="fas fa-times"
+                            onClick={() => {
+                                setModalContents({
+                                    color: "",
+                                    label: "",
+                                });
+                                closeFunction();
+                            }}
+                        ></i>
                     </span>
                 </div>
                 <div className="modal-body">

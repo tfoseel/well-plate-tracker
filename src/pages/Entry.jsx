@@ -66,11 +66,13 @@ export default function Entry() {
                 </div>
                 <div className="row">
                     <ModeSelectButton
-                        mode="1. Design"
+                        icon="fas fa-pencil-ruler"
+                        mode="Design"
                         onClick={() => navigate("/design")}
                     />
                     <ModeSelectButton
-                        mode="2. Start"
+                        icon="fas fa-vial"
+                        mode="Start"
                         onClick={() => navigate("/start")}
                     />
                 </div>

@@ -2,7 +2,7 @@ import { useSelector } from "react-redux";
 
 import "../styles.css";
 
-export default function ModeSelectButton({ mode, onClick }) {
+export default function ModeSelectButton({ icon, mode, onClick }) {
     /* Use redux state */
     const { row, col } = useSelector((state) => state.wellNumber);
     return (
@@ -16,6 +16,7 @@ export default function ModeSelectButton({ mode, onClick }) {
                 onClick={onClick}
                 disabled={row * col === 0}
             >
+                <i className={icon} style={{ marginRight: "2%" }} />
                 {mode}
             </div>
         </div>

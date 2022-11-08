@@ -2,15 +2,20 @@ import "../styles.css";
 
 export default function Cell({ pos, selected, color, label, onClick }) {
     return (
-        <td id={"td-" + pos} key={pos} onClick={onClick}>
+        <td value={"well-" + pos} key={pos} onClick={onClick}>
             <div
-                id={"well-" + pos}
                 className={"cell well" + (selected ? " well-selected" : "")}
-                style={{ borderColor: color }}
+                style={{
+                    position: "relative",
+                    borderColor: color,
+                    color: color,
+                }}
+                value={"well-" + pos}
             >
-                <h5>{pos}</h5>
-                <br />
                 <h6>{label}</h6>
+                <div className="well-position" value={"well-" + pos}>
+                    {pos}
+                </div>
             </div>
         </td>
     );
