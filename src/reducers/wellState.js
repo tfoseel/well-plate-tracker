@@ -6,7 +6,6 @@ export const WELL_384 = "WELLSTATE/WELL_384";
 export const UPDATE = "WELLSTATE/UPDATE";
 
 /* Helper functions */
-
 export const init2DArray = (row, col, element) => {
     let arr = Array.from(Array(row), () => new Array(col));
     arr.map((a) => a.fill(element));
@@ -37,15 +36,15 @@ const initalState = [];
 const wellState = (state = initalState, action) => {
     switch (action.type) {
         case WELL_24:
-            return init2DArray(4, 6, { color: "red", label: "" });
+            return init2DArray(4, 6, { color: "grey", label: "" });
         case WELL_48:
-            return init2DArray(6, 8, { color: "red", label: "" });
+            return init2DArray(6, 8, { color: "grey", label: "" });
         case WELL_96:
-            return init2DArray(8, 12, { color: "red", label: "" });
+            return init2DArray(8, 12, { color: "grey", label: "" });
         case WELL_384:
-            return init2DArray(16, 24, { color: "red", label: "" });
+            return init2DArray(16, 24, { color: "grey", label: "" });
         case UPDATE:
-            const copy = [...state];
+            const copy = JSON.parse(JSON.stringify(state));
             action.posList.forEach((pos) => {
                 let { y, x } = getIndex(pos);
                 copy[y][x].color = action.color;

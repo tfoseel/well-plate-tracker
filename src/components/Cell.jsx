@@ -1,13 +1,16 @@
 import "../styles.css";
 
-export default function Cell({ pos, selected, onClick }) {
+export default function Cell({ pos, selected, color, label, onClick }) {
     return (
         <td id={"td-" + pos} key={pos} onClick={onClick}>
             <div
-                className={"cell well" + (selected ? " well-selected" : "")}
                 id={"well-" + pos}
+                className={"cell well" + (selected ? " well-selected" : "")}
+                style={{ borderColor: color }}
             >
-                {pos}
+                <h5>{pos}</h5>
+                <br />
+                <h6>{label}</h6>
             </div>
         </td>
     );

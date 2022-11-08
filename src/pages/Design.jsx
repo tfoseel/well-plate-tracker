@@ -7,12 +7,12 @@ import "../styles.css";
 import Header from "../components/Header";
 import Cell from "../components/Cell";
 import EditButton from "../components/EditButton";
+import Modal from "../components/Modal";
 
-import { init2DArray, getIndex, updateWellState } from "../reducers/wellState";
+import { init2DArray, getIndex } from "../reducers/wellState";
 
 export default function Design() {
     /* Use redux state */
-    const dispatch = useDispatch();
     const { row, col } = useSelector((state) => state.wellNumber);
     const wellState = useSelector((state) => state.wellState);
 
@@ -26,8 +26,9 @@ export default function Design() {
     const ROW = "ABCDEFGHIJKLMNOPQRSTUVWXYZ".substring(0, row).split("");
     const COULMN = [...Array(col)].map((_, i) => i + 1);
 
-    /* Manage selected cells */
+    /* Manage selected cells and modal */
     const [selected, setSelected] = useState(init2DArray(row, col, false));
+    const [modal, setModal] = useState(false);
 
     /* Helper functions */
     const isIthRowAllSelected = (pos) => {
@@ -95,7 +96,15 @@ export default function Design() {
             className="center-inside table-wrapper"
             style={{ width: "100vw", height: "100vh" }}
         >
-            <EditButton onClick={() => console.log(wellState)} />
+            <EditButton onClick={() => setModal(true)} />
+            <Modal
+                isVisible={modal}
+                selected={selected}
+                closeFunction={() => {
+                    setModal(false);
+                    setSelected(init2DArray(row, col, false));
+                }}
+            />
             <table>
                 <tbody className="table">
                     <tr>
@@ -107,18 +116,19 @@ export default function Design() {
                     {ROW.map((r) => (
                         <tr key={"row-" + r}>
                             <Header pos={r} key={r} onClick={handleClick} />
-                            {COULMN.map((n) => (
-                                <Cell
-                                    key={r + n}
-                                    pos={r + n}
-                                    selected={
-                                        selected[getIndex(r + n).y][
-                                            getIndex(r + n).x
-                                        ]
-                                    }
-                                    onClick={handleClick}
-                                />
-                            ))}
+                            {COULMN.map((n) => {
+                                const { y, x } = getIndex(r + n);
+                                return (
+                                    <Cell
+                                        key={r + n}
+                                        pos={r + n}
+                                        color={wellState[y][x].color}
+                                        label={wellState[y][x].label}
+                                        selected={selected[y][x]}
+                                        onClick={handleClick}
+                                    />
+                                );
+                            })}
                         </tr>
                     ))}
                 </tbody>
