@@ -5,13 +5,12 @@ import { useSelector } from "react-redux";
 import "../styles.css";
 
 import Header from "../components/Header";
-import DesignCell from "../components/DesignCell";
+import ExperimentCell from "../components/ExperimentCell";
 import FixedButton from "../components/FixedButton";
-import Modal from "../components/Modal";
 
 import { init2DArray, getIndex } from "../reducers/wellState";
 
-export default function Design() {
+export default function Experiment() {
     /* Use redux state */
     const { row, col } = useSelector((state) => state.wellNumber);
     const wellState = useSelector((state) => state.wellState);
@@ -28,7 +27,6 @@ export default function Design() {
 
     /* Manage selected cells and modal */
     const [selected, setSelected] = useState(init2DArray(row, col, false));
-    const [modal, setModal] = useState(false);
 
     /* Helper functions */
     const isIthRowAllSelected = (pos) => {
@@ -49,6 +47,7 @@ export default function Design() {
 
     /* Handle click event */
     const handleClick = (e) => {
+        console.log(e.target);
         const copy = [...selected];
         const [type, pos] = e.target.getAttribute("value").split("-");
         if (type === "well") {
@@ -97,20 +96,15 @@ export default function Design() {
             style={{ width: "100vw", height: "100vh" }}
         >
             <div className="row fixed-button-group">
-                <FixedButton icon="fas fa-pen" onClick={() => setModal(true)} />
                 <FixedButton
-                    icon="fas fa-vial"
-                    onClick={() => navigate("/experiment")}
+                    icon="fas fa-sync-alt"
+                    onClick={() => setSelected(init2DArray(row, col, false))}
+                />
+                <FixedButton
+                    icon="fas fa-pencil-ruler"
+                    onClick={() => navigate("/design")}
                 />
             </div>
-            <Modal
-                isVisible={modal}
-                selected={selected}
-                closeFunction={() => {
-                    setModal(false);
-                    setSelected(init2DArray(row, col, false));
-                }}
-            />
             <table>
                 <tbody className="table">
                     <tr>
@@ -125,7 +119,7 @@ export default function Design() {
                             {COULMN.map((n) => {
                                 const { y, x } = getIndex(r + n);
                                 return (
-                                    <DesignCell
+                                    <ExperimentCell
                                         key={r + n}
                                         pos={r + n}
                                         color={wellState[y][x].color}

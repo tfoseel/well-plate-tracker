@@ -1,14 +1,21 @@
 import "../styles.css";
 
-export default function DesignCell({ pos, selected, color, label, onClick }) {
+export default function ExperimentCell({
+    pos,
+    selected,
+    color,
+    label,
+    onClick,
+}) {
     return (
         <td value={"well-" + pos} key={pos} onClick={onClick}>
             <div
-                className={"cell well" + (selected ? " well-selected" : "")}
+                className={"cell well"}
                 style={{
                     position: "relative",
                     borderColor: color,
-                    color: color,
+                    backgroundColor: selected && color,
+                    opacity: "50%",
                 }}
                 value={"well-" + pos}
             >

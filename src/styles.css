@@ -57,15 +57,19 @@ input[type="color"]::-webkit-color-swatch {
     width: 100%;
 }
 
-.edit-button {
+.fixed-button-group {
     position: fixed;
-    top: 20px;
-    left: 20px;
+    top: 25px;
+    left: 25px;
+    z-index: 100;
+}
+
+.fixed-button {
+    margin: 5px;
     height: 3rem;
     width: 3rem;
     opacity: 50%;
     border: 50%;
-    z-index: 100;
 }
 
 .table-wrapper {

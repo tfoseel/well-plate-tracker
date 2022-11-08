@@ -1,10 +1,11 @@
-export default function EditButton({ onClick }) {
+export default function FixedButton({ icon, top, left, onClick }) {
     return (
         <div
-            className="btn btn-primary edit-button center-inside"
+            className="btn btn-primary fixed-button center-inside"
             onClick={onClick}
+            style={{ top, left }}
         >
-            <i className="fas fa-pen"></i>
+            <i className={icon} />
         </div>
     );
 }
