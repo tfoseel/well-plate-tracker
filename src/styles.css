@@ -27,7 +27,7 @@ input[type="color"]::-webkit-color-swatch-wrapper {
 }
 
 input[type="color"]::-webkit-color-swatch {
-    border: solid 1px #000; /*change color of the swatch border here*/
+    border: solid 1px #000;
 }
 
 .center-inside {
@@ -73,14 +73,20 @@ input[type="color"]::-webkit-color-swatch {
 }
 
 .table-wrapper {
+    position: relative;
     width: 100vw;
     height: 100vh;
     overflow: auto;
 }
 
-.table {
-    width: auto;
-    height: auto;
+.table-center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(max(-50%, -50vw), max(-50%, -50vh));
+}
+
+.tbody {
     font-size: 10px;
     table-layout: fixed;
 }
@@ -93,6 +99,7 @@ input[type="color"]::-webkit-color-swatch {
 
 .header {
     position: sticky;
+    position: -webkit-sticky;
     top: 0;
     left: 0;
     z-index: 1;

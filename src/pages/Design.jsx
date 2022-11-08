@@ -92,10 +92,7 @@ export default function Design() {
         setSelected(copy);
     };
     return (
-        <div
-            className="center-inside table-wrapper"
-            style={{ width: "100vw", height: "100vh" }}
-        >
+        <div className="table-wrapper">
             <div className="row fixed-button-group">
                 <FixedButton icon="fas fa-pen" onClick={() => setModal(true)} />
                 <FixedButton
@@ -111,34 +108,36 @@ export default function Design() {
                     setSelected(init2DArray(row, col, false));
                 }}
             />
-            <table>
-                <tbody className="table">
-                    <tr>
-                        <td className="header table-origin"></td>
-                        {COULMN.map((n) => (
-                            <Header pos={n} key={n} onClick={handleClick} />
-                        ))}
-                    </tr>
-                    {ROW.map((r) => (
-                        <tr key={"row-" + r}>
-                            <Header pos={r} key={r} onClick={handleClick} />
-                            {COULMN.map((n) => {
-                                const { y, x } = getIndex(r + n);
-                                return (
-                                    <DesignCell
-                                        key={r + n}
-                                        pos={r + n}
-                                        color={wellState[y][x].color}
-                                        label={wellState[y][x].label}
-                                        selected={selected[y][x]}
-                                        onClick={handleClick}
-                                    />
-                                );
-                            })}
+            <div className="table-center">
+                <table>
+                    <tbody className="tbody">
+                        <tr>
+                            <td className="header table-origin"></td>
+                            {COULMN.map((n) => (
+                                <Header pos={n} key={n} onClick={handleClick} />
+                            ))}
                         </tr>
-                    ))}
-                </tbody>
-            </table>
+                        {ROW.map((r) => (
+                            <tr key={"row-" + r}>
+                                <Header pos={r} key={r} onClick={handleClick} />
+                                {COULMN.map((n) => {
+                                    const { y, x } = getIndex(r + n);
+                                    return (
+                                        <DesignCell
+                                            key={r + n}
+                                            pos={r + n}
+                                            color={wellState[y][x].color}
+                                            label={wellState[y][x].label}
+                                            selected={selected[y][x]}
+                                            onClick={handleClick}
+                                        />
+                                    );
+                                })}
+                            </tr>
+                        ))}
+                    </tbody>
+                </table>
+            </div>
         </div>
     );
 }

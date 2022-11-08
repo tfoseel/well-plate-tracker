@@ -2,7 +2,7 @@ import "../styles.css";
 
 export default function Header({ pos, onClick }) {
     return (
-        <td
+        <th
             value={"header-" + pos}
             key={pos}
             className="header"
@@ -11,6 +11,6 @@ export default function Header({ pos, onClick }) {
             <div className="cell" value={"header-" + pos}>
                 {pos}
             </div>
-        </td>
+        </th>
     );
 }

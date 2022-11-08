@@ -73,7 +73,7 @@ export default function Entry() {
                     <ModeSelectButton
                         icon="fas fa-vial"
                         mode="Start"
-                        onClick={() => navigate("/start")}
+                        onClick={() => navigate("/experiment")}
                     />
                 </div>
             </div>
